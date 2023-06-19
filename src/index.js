@@ -14,7 +14,7 @@ function togglingHidden(...elements) {
 
 function createList() {
     togglingHidden(selectEl, loaderEl);
-
+           
     fetchBreeds()
     .then(result => {
         breeds = result;
@@ -32,7 +32,10 @@ function createList() {
     });  
 }
 
-function createCard(event) {
+function createCard(event) { 
+    if (!errorEl.classList.contains('hidden')) {
+        togglingHidden(errorEl);
+    }
  
     if (event.target.tagName === !'OPTION') {
         return;
