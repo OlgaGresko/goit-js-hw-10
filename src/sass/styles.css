@@ -1,0 +1,32 @@
+body {
+    padding: 20px;
+}
+
+.breed-select {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.loader, .error {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: bold;
+
+}
+
+.error {
+    color: red;
+}
+
+.cat-info {
+    max-width: 1600px;
+    display: flex;
+    gap: 50px;
+}
+
+span {
+    font-weight: bold;
+}
