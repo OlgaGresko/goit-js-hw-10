@@ -12,15 +12,26 @@ function togglingHidden(...elements) {
     })
 }
 
+function createBreedsMarkup() {
+    let breedsList = breeds.map(breed => 
+        `<option value="${breed.id}">${breed.name}</option>`)
+        .join();
+    selectEl.innerHTML = breedsList;
+}
+
+function createCardMarkup(breedImg, breedId) {
+    catInfoEl.innerHTML = `<img src="${breedImg[0].url}" height="450px" alt="Cat"></img>`;
+        let breed = breeds.find(breed => breed.id === breedId);
+        catInfoEl.insertAdjacentHTML('beforeend', `<div><h1>${breed.name}</h1><p>${breed.description}</p><p><span>Temperament: </span>${breed.temperament}</p></div>`);
+}
+
 function createList() {
     togglingHidden(selectEl, loaderEl);
            
     fetchBreeds()
     .then(result => {
         breeds = result;
-        breeds.forEach(breed => {
-            selectEl.insertAdjacentHTML("beforeend", `<option value="${breed.id}">${breed.name}</option>`)
-        });
+        createBreedsMarkup();
         return breeds;
         })
     .then(() => {
@@ -46,9 +57,7 @@ function createCard(event) {
                
     fetchCatByBreed(breedId)
     .then(breedImg => {
-        catInfoEl.innerHTML = `<img src="${breedImg[0].url}" height="450px" alt="Cat"></img>`;
-        let breed = breeds.find(breed => breed.id === breedId);
-        catInfoEl.insertAdjacentHTML('beforeend', `<div><h1>${breed.name}</h1><p>${breed.description}</p><p><span>Temperament: </span>${breed.temperament}</p></div>`);
+        createCardMarkup(breedImg, breedId);
     })
     .then(() => {
         togglingHidden(loaderEl);
